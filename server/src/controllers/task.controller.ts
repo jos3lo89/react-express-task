@@ -61,6 +61,21 @@ class TaskController {
       return sendError(res, error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
+
+  async getTaskId(req: Request, res: Response) {
+    try {
+      const task = await taskModel.getTaskId(req.params.id);
+
+      // sendSuccess(res, task, HttpStatus.OK)
+
+      res.status(200).json(task);
+    } catch (error: any) {
+      if (error instanceof Error) {
+        return sendError(res, error.message, HttpStatus.BAD_REQUEST);
+      }
+      return sendError(res, error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 }
 
 export default new TaskController();

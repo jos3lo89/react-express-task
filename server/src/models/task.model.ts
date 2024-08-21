@@ -60,6 +60,18 @@ class TaskModel {
       throw new Error("no se pudo actualizar la tarea");
     }
   }
+
+  async getTaskId(id: string){
+    try {
+      const task = await this.prisma.task.findFirst({where: {
+        id
+      }})
+
+      return task
+    } catch (error) {
+      throw new Error("No se pudo obtener la tarea")
+    }
+  }
 }
 
 export default new TaskModel();

@@ -11,11 +11,17 @@ const HeaderComponent = () => {
   return (
     <header className="bg-slate-800 flex justify-around items-center  ">
       <nav className="space-x-6 text-center py-4">
-        <Link className="capitalize font-normal text-xl hover:bg-gray-600 rounded-lg border-none p-2" to={"/"}>
+        <Link
+          className="capitalize font-normal text-xl hover:bg-gray-600 rounded-lg border-none p-2"
+          to={"/"}
+        >
           Home
         </Link>
 
-        <Link className="capitalize font-normal text-xl hover:bg-gray-600 rounded-lg border-none p-2" to={"/new"}>
+        <Link
+          className="capitalize font-normal text-xl hover:bg-gray-600 rounded-lg border-none p-2"
+          to={"/new"}
+        >
           New task
         </Link>
       </nav>

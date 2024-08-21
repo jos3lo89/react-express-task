@@ -29,6 +29,16 @@ const route = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "/update/:id",
+        element: (
+          <ProtectedRoute>
+            <Suspense fallback={<LoadingPage />}>
+              <NewPage />
+            </Suspense>
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
   {
