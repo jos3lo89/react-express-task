@@ -3,9 +3,11 @@ import { useAuthStore } from "../stores/auth.store";
 
 const HeaderComponent = () => {
   const logout = useAuthStore((set) => set.logout);
+  const clearStore = useAuthStore((set) => set.clearStore);
 
   const handleClik = () => {
     logout();
+    clearStore();
   };
 
   return (

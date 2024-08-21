@@ -4,6 +4,7 @@ import { z } from "zod";
 import api from "../api/api";
 import { useAuthStore } from "../stores/auth.store";
 import { Link, useNavigate } from "react-router-dom";
+import { toast, Toaster } from "sonner";
 
 const formSchema = z.object({
   email: z
@@ -37,17 +38,28 @@ const LoginPage = () => {
 
       reset();
 
-      const data = {
+      const userData = {
         email: res.data.data.email,
         id: res.data.data.id,
         name: res.data.data.name,
       };
 
       const token = res.data.data.token;
-      login(data, token);
+      login(userData, token);
       navigate("/");
-    } catch (error) {
-      console.error("Error:", error);
+    } catch (error: any) {
+      if (Array.isArray(error.response.data.error)) {
+        error.response.data.error.forEach((e: any) => {
+          toast.warning(e, {
+            duration: 2000,
+          });
+          console.log(e);
+        });
+      } else {
+        toast(error.response.data.error, {
+          duration: 200,
+        });
+      }
     }
   };
 
@@ -119,10 +131,11 @@ const LoginPage = () => {
             <Link className="text-blue-600 cursor-pointer" to="/register">
               registrate
             </Link>
-             ?
+            ?
           </p>
         </div>
       </form>
+      <Toaster />
     </>
   );
 };
